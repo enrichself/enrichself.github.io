@@ -397,7 +397,7 @@
 <script type="text/javascript">
   // 按需加载背景
   // 如果是all，就直接加载了
-  if("" == "all") {
+  if("pc" == "all") {
     $.getScript("/js/particle.js?v=");
   }
   // 识别手机或电脑的js开始
@@ -434,9 +434,24 @@
   <!-- 页面点击小红心 -->
   <!-- 页面点击小红心 -->
 
+  <script type="text/javascript" src="/js/love.js?v="></script>
+
 
   <!-- 鼠标移动，效果 -->
   <!-- 鼠标移动特效 -->
+
+  <script type="text/javascript" src="/js/jquery-stars.js?v="></script>
+  <script type="text/javascript">
+  jQuery('body').jstars({
+  	image_path: '/images',
+  	image: 'candy-cane-stars.png',
+  	style: 'white',
+  	width: 34,
+  	height: 34,
+  	delay: 700,
+  	frequency: 5
+  });
+  </script>
 
 
 </body>
