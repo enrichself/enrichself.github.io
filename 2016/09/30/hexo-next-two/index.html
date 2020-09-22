@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本篇文章将介绍基于NexT主题下的一些扩展功能的实现。首先，我们需要明白： 在 Hexo 中有两份主要的配置文件，其名称都是 _config.yml 。其中，一份位于站点根目录下，主要包含 Hexo 本身的配置；另一份位于主题目录下，这份配置由主题作者提供，主要用于配置主题相关的选项。   我们约定，将前者称为 站点配置文件，后者称为 主题配置文件  1.设置侧栏的位置修改 主题配置文件 中 si">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo-NexT搭建个人博客（二）">
+<meta property="og:url" content="http://example.com/2016/09/30/hexo-next-two/index.html">
+<meta property="og:site_name" content="Advance">
+<meta property="og:description" content="本篇文章将介绍基于NexT主题下的一些扩展功能的实现。首先，我们需要明白： 在 Hexo 中有两份主要的配置文件，其名称都是 _config.yml 。其中，一份位于站点根目录下，主要包含 Hexo 本身的配置；另一份位于主题目录下，这份配置由主题作者提供，主要用于配置主题相关的选项。   我们约定，将前者称为 站点配置文件，后者称为 主题配置文件  1.设置侧栏的位置修改 主题配置文件 中 si">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-09-30T14:18:22.000Z">
+<meta property="article:modified_time" content="2020-07-19T06:52:07.000Z">
+<meta property="article:author" content="陈玉飞">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Next">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2016/09/30/hexo-next-two/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Hexo-NexT搭建个人博客（二） | Advance</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Advance</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2016/09/30/hexo-next-two/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈玉飞">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Advance">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hexo-NexT搭建个人博客（二）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2016-09-30 22:18:22" itemprop="dateCreated datePublished" datetime="2016-09-30T22:18:22+08:00">2016-09-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-19 14:52:07" itemprop="dateModified" datetime="2020-07-19T14:52:07+08:00">2020-07-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本篇文章将介绍基于NexT主题下的一些扩展功能的实现。<br>首先，我们需要明白：</p>
+<p id="div-border-left-yellow">在 Hexo 中有两份主要的配置文件，其名称都是 _config.yml 。其中，一份位于站点根目录下，主要包含 Hexo 本身的配置；另一份位于主题目录下，这份配置由主题作者提供，主要用于配置主题相关的选项。
+  我们约定，将前者称为 <span id="inline-blue">站点配置文件</span>，后者称为 <span id="inline-purple">主题配置文件</span></p>
+
+<h4 id="1-设置侧栏的位置"><a href="#1-设置侧栏的位置" class="headerlink" title="1.设置侧栏的位置"></a>1.设置侧栏的位置</h4><p>修改 <span id="inline-purple">主题配置文件</span> 中 <code>sidebar.position</code> 的值，支持的选项有：<strong>left</strong> <strong>right</strong><br>目前仅 Pisces Scheme 支持 position 配置，也就是说NexT主题的侧栏位置是不能设置的，设置了也没用，反正都在右边。</p>
+<a id="more"></a>
+
+<h4 id="2-关于添加居中模块"><a href="#2-关于添加居中模块" class="headerlink" title="2. 关于添加居中模块"></a>2. 关于添加居中模块</h4><blockquote class="blockquote-center">优秀的人，不是不合群，而是他们合群的人里面没有你</blockquote>
+代码如下：
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">blockquote</span> <span class="attr">class</span>=<span class="string">&quot;blockquote-center&quot;</span>&gt;</span>优秀的人，不是不合群，而是他们合群的人里面没有你<span class="tag">&lt;/<span class="name">blockquote</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-添加High一下"><a href="#3-添加High一下" class="headerlink" title="3. 添加High一下"></a>3. 添加High一下</h4><p>打开博客根目录 <code>\themes\next\layout\_partials\header.swig</code> ，在<br><code>&lt;ul&gt; ... /ul&gt;</code> 标签之间加入以下代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br></pre></td><td class="code"><pre><span class="line">&lt;li&gt; <span class="xml"><span class="tag">&lt;<span class="name">a</span> <span class="attr">title</span>=<span class="string">&quot;把这个链接拖到你的Chrome收藏夹工具栏中&quot;</span> <span class="attr">href</span>=<span class="string">&#x27;javascript:(function() &#123;</span></span></span></span><br><span class="line"><span class="xml">    function c() &#123;</span></span><br><span class="line"><span class="xml">        var e = document.createElement(&quot;link&quot;);</span></span><br><span class="line"><span class="xml">        e.setAttribute(&quot;type&quot;, &quot;text/css&quot;);</span></span><br><span class="line"><span class="xml">        e.setAttribute(&quot;rel&quot;, &quot;stylesheet&quot;);</span></span><br><span class="line"><span class="xml">        e.setAttribute(&quot;href&quot;, f);</span></span><br><span class="line"><span class="xml">        e.setAttribute(&quot;class&quot;, l);</span></span><br><span class="line"><span class="xml">        document.body.appendChild(e)</span></span><br><span class="line"><span class="xml">    &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="xml">    function h() &#123;</span></span><br><span class="line"><span class="xml">        var e = document.getElementsByClassName(l);</span></span><br><span class="line"><span class="xml">        for (var t = 0; t <span class="tag">&lt; <span class="attr">e.length</span>; <span class="attr">t</span>++) &#123;</span></span></span><br><span class="line"><span class="xml">            document.body.removeChild(e[t])</span></span><br><span class="line"><span class="xml">        &#125;</span></span><br><span class="line"><span class="xml">    &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="xml">    function p() &#123;</span></span><br><span class="line"><span class="xml">        var e = document.createElement(&quot;div&quot;);</span></span><br><span class="line"><span class="xml">        e.setAttribute(&quot;class&quot;, a);</span></span><br><span class="line"><span class="xml">        document.body.appendChild(e);</span></span><br><span class="line"><span class="xml">        setTimeout(function() &#123;</span></span><br><span class="line"><span class="xml">            document.body.removeChild(e)</span></span><br><span class="line"><span class="xml">        &#125;, 100)</span></span><br><span class="line"><span class="xml">    &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="xml">    function d(e) &#123;</span></span><br><span class="line"><span class="xml">        return &#123;</span></span><br><span class="line"><span class="xml">            height : e.offsetHeight,</span></span><br><span class="line"><span class="xml">            width : e.offsetWidth</span></span><br><span class="line"><span class="xml">        &#125;</span></span><br><span class="line"><span class="xml">    &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="xml">    function v(i) &#123;</span></span><br><span class="line"><span class="xml">        var s = d(i);</span></span><br><span class="line"><span class="xml">        return s.height &gt; e &amp;&amp; s.height <span class="tag">&lt; <span class="attr">n</span> &amp;&amp; <span class="attr">s.width</span> &gt;</span> t &amp;&amp; s.width <span class="tag">&lt; <span class="attr">r</span></span></span></span><br><span class="line"><span class="xml">    &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="xml">    function m(e) &#123;</span></span><br><span class="line"><span class="xml">        var t = e;</span></span><br><span class="line"><span class="xml">        var n = 0;</span></span><br><span class="line"><span class="xml">        while (!!t) &#123;</span></span><br><span class="line"><span class="xml">            n += t.offsetTop;</span></span><br><span class="line"><span class="xml">            t = t.offsetParent</span></span><br><span class="line"><span class="xml">        &#125;</span></span><br><span class="line"><span class="xml">        return n</span></span><br><span class="line"><span class="xml">    &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="xml">    function g() &#123;</span></span><br><span class="line"><span class="xml">        var e = document.documentElement;</span></span><br><span class="line"><span class="xml">        if (!!window.innerWidth) &#123;</span></span><br><span class="line"><span class="xml">            return window.innerHeight</span></span><br><span class="line"><span class="xml">        &#125; else if (e &amp;&amp; !isNaN(e.clientHeight)) &#123;</span></span><br><span class="line"><span class="xml">            return e.clientHeight</span></span><br><span class="line"><span class="xml">        &#125;</span></span><br><span class="line"><span class="xml">        return 0</span></span><br><span class="line"><span class="xml">    &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="xml">    function y() &#123;</span></span><br><span class="line"><span class="xml">        if (window.pageYOffset) &#123;</span></span><br><span class="line"><span class="xml">            return window.pageYOffset</span></span><br><span class="line"><span class="xml">        &#125;</span></span><br><span class="line"><span class="xml">        return Math.max(document.documentElement.scrollTop, document.body.scrollTop)</span></span><br><span class="line"><span class="xml">    &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="xml">    function E(e) &#123;</span></span><br><span class="line"><span class="xml">        var t = m(e);</span></span><br><span class="line"><span class="xml">        return t &gt;= w &amp;&amp; t <span class="tag">&lt;<span class="name">=</span> <span class="attr">b</span> + <span class="attr">w</span></span></span></span><br><span class="line"><span class="xml">    &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="xml">    function S() &#123;</span></span><br><span class="line"><span class="xml">        var e = document.createElement(&quot;audio&quot;);</span></span><br><span class="line"><span class="xml">        e.setAttribute(&quot;class&quot;, l);</span></span><br><span class="line"><span class="xml">        e.src = i;</span></span><br><span class="line"><span class="xml">        e.loop = false;</span></span><br><span class="line"><span class="xml">        e.addEventListener(&quot;canplay&quot;, function() &#123;</span></span><br><span class="line"><span class="xml">            setTimeout(function() &#123;</span></span><br><span class="line"><span class="xml">                x(k)</span></span><br><span class="line"><span class="xml">            &#125;, 500);</span></span><br><span class="line"><span class="xml">            setTimeout(function() &#123;</span></span><br><span class="line"><span class="xml">                N();</span></span><br><span class="line"><span class="xml">                p();</span></span><br><span class="line"><span class="xml">                for (var e = 0; e <span class="tag">&lt; <span class="attr">O.length</span>; <span class="attr">e</span>++) &#123;</span></span></span><br><span class="line"><span class="xml">                    T(O[e])</span></span><br><span class="line"><span class="xml">                &#125;</span></span><br><span class="line"><span class="xml">            &#125;, 15500)</span></span><br><span class="line"><span class="xml">        &#125;, true);</span></span><br><span class="line"><span class="xml">        e.addEventListener(&quot;ended&quot;, function() &#123;</span></span><br><span class="line"><span class="xml">            N();</span></span><br><span class="line"><span class="xml">            h()</span></span><br><span class="line"><span class="xml">        &#125;, true);</span></span><br><span class="line">        e.innerHTML = &quot; &lt;p&gt;If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.&lt;/p&gt; &lt;p&gt;&quot;;</span><br><span class="line">        document.body.appendChild(e);</span><br><span class="line">        e.play()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function x(e) &#123;</span><br><span class="line">        e.className += &quot; &quot; + s + &quot; &quot; + o</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function T(e) &#123;</span><br><span class="line">        e.className += &quot; &quot; + s + &quot; &quot; + u[Math.floor(Math.random() * u.length)]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function N() &#123;</span><br><span class="line">        var e = document.getElementsByClassName(s);</span><br><span class="line">        var t = new RegExp(&quot;\\b&quot; + s + &quot;\\b&quot;);</span><br><span class="line">        for (var n = 0; n &lt; e.length; ) &#123;</span><br><span class="line">            e[n].className = e[n].className.replace(t, &quot;&quot;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    var e = 30;</span><br><span class="line">    var t = 30;</span><br><span class="line">    var n = 350;</span><br><span class="line">    var r = 350;</span><br><span class="line">    var i = &quot;//7xuupy.com1.z0.glb.clouddn.com/tongxingSibel%20-%20Im%20Sorry.mp3&quot;;</span><br><span class="line">    var s = &quot;mw-harlem_shake_me&quot;;</span><br><span class="line">    var o = &quot;im_first&quot;;</span><br><span class="line">    var u = [&quot;im_drunk&quot;, &quot;im_baked&quot;, &quot;im_trippin&quot;, &quot;im_blown&quot;];</span><br><span class="line">    var a = &quot;mw-strobe_light&quot;;</span><br><span class="line">    var f = &quot;//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css&quot;;</span><br><span class="line">    var l = &quot;mw_added_css&quot;;</span><br><span class="line">    var b = g();</span><br><span class="line">    var w = y();</span><br><span class="line">    var C = document.getElementsByTagName(&quot;*&quot;);</span><br><span class="line">    var k = null;</span><br><span class="line">    for (var L = 0; L &lt; C.length; L++) &#123;</span><br><span class="line">        var A = C[L];</span><br><span class="line">        if (v(A)) &#123;</span><br><span class="line">            if (E(A)) &#123;</span><br><span class="line">                k = A;</span><br><span class="line">                break</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    if (A === null) &#123;</span><br><span class="line">        console.warn(&quot;Could not find a node of the right size. Please try a different page.&quot;);</span><br><span class="line">        return</span><br><span class="line">    &#125;</span><br><span class="line">    c();</span><br><span class="line">    S();</span><br><span class="line">    var O = [];</span><br><span class="line">    for (var L = 0; L &lt; C.length; L++) &#123;</span><br><span class="line">        var A = C[L];</span><br><span class="line">        if (v(A)) &#123;</span><br><span class="line">            O.push(A)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="xml">    &#125;)()    &#x27;&gt;High一下<span class="tag">&lt;/<span class="name">a</span>&gt;</span> <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="4-添加最近访客"><a href="#4-添加最近访客" class="headerlink" title="4. 添加最近访客"></a>4. 添加最近访客</h4><p>在需要添加最近访客的网页对应的 markdown 文件中添加如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">最近访客</span><br><span class="line">&lt;div class&#x3D;&quot;ds-recent-visitors&quot; data-num-items&#x3D;&quot;39&quot; data-avatar-size&#x3D;&quot;40&quot; id&#x3D;&quot;ds-recent-visitors&quot;&gt;&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="5-鼠标点击小红心的设置"><a href="#5-鼠标点击小红心的设置" class="headerlink" title="5. 鼠标点击小红心的设置"></a>5. 鼠标点击小红心的设置</h4><ol>
+<li>将 <a target="_blank" rel="noopener" href="https://github.com/Neveryu/Neveryu.github.io/blob/master/js/src/love.js">love.js</a> 文件添加到 \themes\next\source\js\src 文件目录下。</li>
+<li>找到 <code>\themes\next\layout\_layout.swing</code> 文件，** 在文件的后面，<code>&lt;/body&gt;</code> 标签之前 ** 添加以下代码：<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 页面点击小红心 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;/js/src/love.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="6-背景的设置"><a href="#6-背景的设置" class="headerlink" title="6. 背景的设置"></a>6. 背景的设置</h4><ol>
+<li>将 <a target="_blank" rel="noopener" href="https://github.com/Neveryu/Neveryu.github.io/blob/master/js/src/particle.js">particle.js</a> 文件添加到 \themes\next\source\js\src 文件目录下。</li>
+<li>找到 <code>\themes\next\layout\_layout.swing</code> 文件，** 在文件的后面，<code>&lt;/body&gt;</code>标签之前 ** 添加以下代码：<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 背景动画 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;/js/src/particle.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="7-修改文章内链接文本样式"><a href="#7-修改文章内链接文本样式" class="headerlink" title="7.修改文章内链接文本样式"></a>7.修改文章内链接文本样式</h4><p>将链接文本设置为蓝色，鼠标划过时文字颜色加深，并显示下划线。<br>找到文件 <code>themes\next\source\css\_custom\custom.styl</code> ，添加如下 css 样式：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.post-body</span> <span class="selector-tag">p</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#0593d3</span>;</span><br><span class="line">  <span class="attribute">border-bottom</span>: none;</span><br><span class="line">  &amp;:hover &#123;</span><br><span class="line">    <span class="selector-tag">color</span>: <span class="selector-id">#0477ab</span>;</span><br><span class="line">    <span class="selector-tag">text-decoration</span>: <span class="selector-tag">underline</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="8-多说评论不稳定，加载速度慢怎么办？"><a href="#8-多说评论不稳定，加载速度慢怎么办？" class="headerlink" title="8. 多说评论不稳定，加载速度慢怎么办？"></a>8. 多说评论不稳定，加载速度慢怎么办？</h4><p>把多说评论依赖的 embed.js 放置底部，这里需要修改的文件是 duoshuo.swig。<br>将</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(document.getElementsByTagName(&#39;head&#39;)[0]</span><br></pre></td></tr></table></figure>
+<p>修改成下面的代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(document.getElementById(&#39;footer&#39;)</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="9-给-Github-添加-README"><a href="#9-给-Github-添加-README" class="headerlink" title="9. 给 Github 添加 README"></a>9. 给 Github 添加 README</h4><p>默认情况下，Github中每一个项目，我们希望有一份 README.md 的文件来作为项目的说明，但是我们在项目根目录下的 blog\source 目录下创建一份 README.md 文件，写好说明介绍，部署的时候，这个 README.md 会被 hexo 解析掉，而不会被解析到 Github 中去的。<br>正确的解决方法其实很简单：<br>** 把 README.md 文件的后缀名改成 “MDOWN” 然后扔到<code>blog/source</code>文件夹下即可，这样 hexo 不会解析，Github 也会将其作为 MD 文件解析。 **</p>
+<h4 id="10-给-Blog-添加-LICENSE"><a href="#10-给-Blog-添加-LICENSE" class="headerlink" title="10. 给 Blog 添加 LICENSE"></a>10. 给 Blog 添加 LICENSE</h4><p>在 <span id="inline-purple">主题配置文件</span> 中的 160 行左右：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Creative Commons 4.0 International License.</span><br><span class="line"># http:&#x2F;&#x2F;creativecommons.org&#x2F;</span><br><span class="line"># Available: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero</span><br><span class="line">creative_commons: by-nc-sa</span><br><span class="line">#creative_commons:</span><br></pre></td></tr></table></figure>
+<p>将其中第 4 行的注释放开，然后选择你想使用的 LICENSE 即可，可选项参照第 3 行。</p>
+<h5 style="color:#f63;"><i>最后要说的是：</i></h5>
+<p id="div-border-top-green"><i>[博客源码](https://github.com/Neveryu/Neveryu.github.io) ， 欢迎 star
+</i></p>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+              <a href="/tags/Next/" rel="tag"># Next</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/09/25/essay-20160925/" rel="prev" title="如果深圳的夜晚没有风">
+      <i class="fa fa-chevron-left"></i> 如果深圳的夜晚没有风
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/10/07/git/" rel="next" title="Git学习总结">
+      Git学习总结 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E8%AE%BE%E7%BD%AE%E4%BE%A7%E6%A0%8F%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">1.设置侧栏的位置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%85%B3%E4%BA%8E%E6%B7%BB%E5%8A%A0%E5%B1%85%E4%B8%AD%E6%A8%A1%E5%9D%97"><span class="nav-number">2.</span> <span class="nav-text">2. 关于添加居中模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%B7%BB%E5%8A%A0High%E4%B8%80%E4%B8%8B"><span class="nav-number">3.</span> <span class="nav-text">3. 添加High一下</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E6%B7%BB%E5%8A%A0%E6%9C%80%E8%BF%91%E8%AE%BF%E5%AE%A2"><span class="nav-number">4.</span> <span class="nav-text">4. 添加最近访客</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E9%BC%A0%E6%A0%87%E7%82%B9%E5%87%BB%E5%B0%8F%E7%BA%A2%E5%BF%83%E7%9A%84%E8%AE%BE%E7%BD%AE"><span class="nav-number">5.</span> <span class="nav-text">5. 鼠标点击小红心的设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E8%83%8C%E6%99%AF%E7%9A%84%E8%AE%BE%E7%BD%AE"><span class="nav-number">6.</span> <span class="nav-text">6. 背景的设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-%E4%BF%AE%E6%94%B9%E6%96%87%E7%AB%A0%E5%86%85%E9%93%BE%E6%8E%A5%E6%96%87%E6%9C%AC%E6%A0%B7%E5%BC%8F"><span class="nav-number">7.</span> <span class="nav-text">7.修改文章内链接文本样式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-%E5%A4%9A%E8%AF%B4%E8%AF%84%E8%AE%BA%E4%B8%8D%E7%A8%B3%E5%AE%9A%EF%BC%8C%E5%8A%A0%E8%BD%BD%E9%80%9F%E5%BA%A6%E6%85%A2%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F"><span class="nav-number">8.</span> <span class="nav-text">8. 多说评论不稳定，加载速度慢怎么办？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-%E7%BB%99-Github-%E6%B7%BB%E5%8A%A0-README"><span class="nav-number">9.</span> <span class="nav-text">9. 给 Github 添加 README</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-%E7%BB%99-Blog-%E6%B7%BB%E5%8A%A0-LICENSE"><span class="nav-number">10.</span> <span class="nav-text">10. 给 Blog 添加 LICENSE</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">10.1.</span> <span class="nav-text">最后要说的是：</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">陈玉飞</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">陈玉飞</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
