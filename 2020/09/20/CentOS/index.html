@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="CentOS7.4下安装Oracle 11gR2参考链接CentOS7.4下安装Oracle 11gR2安装环境系统：CentOS7.4  4核4G  磁盘50G Oracle软件版本：linux.x64_11gR2_database_1of2.zip ； linux.x64_11gR2_database_2of2.zip 准备工作安装依赖包：验证相关包是否安装。 1#rpm -qa binuti">
+  <meta name="description" content="参考链接CentOS7.4下安装Oracle 11gR2 安装环境系统：CentOS7.4  4核4G  磁盘50G Oracle软件版本：linux.x64_11gR2_database_1of2.zip ； linux.x64_11gR2_database_2of2.zip 准备工作安装依赖包：验证相关包是否安装。 1#rpm -qa binutils compat-libstdc++-33">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CentOS7.4下安装Oracle 11gR2">
 <meta property="og:url" content="http://example.com/2020/09/20/CentOS/index.html">
 <meta property="og:site_name" content="Advance">
-<meta property="og:description" content="CentOS7.4下安装Oracle 11gR2参考链接CentOS7.4下安装Oracle 11gR2安装环境系统：CentOS7.4  4核4G  磁盘50G Oracle软件版本：linux.x64_11gR2_database_1of2.zip ； linux.x64_11gR2_database_2of2.zip 准备工作安装依赖包：验证相关包是否安装。 1#rpm -qa binuti">
+<meta property="og:description" content="参考链接CentOS7.4下安装Oracle 11gR2 安装环境系统：CentOS7.4  4核4G  磁盘50G Oracle软件版本：linux.x64_11gR2_database_1of2.zip ； linux.x64_11gR2_database_2of2.zip 准备工作安装依赖包：验证相关包是否安装。 1#rpm -qa binutils compat-libstdc++-33">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://ftp.bmp.ovh/imgs/2020/09/f8e7128e02a02f23.png">
 <meta property="og:image" content="https://ftp.bmp.ovh/imgs/2020/09/9c61e833cc562049.png">
 <meta property="og:image" content="https://ftp.bmp.ovh/imgs/2020/09/2c73e58344960a26.png">
 <meta property="og:image" content="https://ftp.bmp.ovh/imgs/2020/09/ce0f123fdec4d710.png">
 <meta property="article:published_time" content="2020-09-20T13:35:57.000Z">
-<meta property="article:modified_time" content="2020-09-23T13:44:12.758Z">
+<meta property="article:modified_time" content="2020-09-24T08:25:35.764Z">
 <meta property="article:author" content="陈玉飞">
 <meta property="article:tag" content="Oracle">
 <meta name="twitter:card" content="summary">
@@ -237,7 +237,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-23 21:44:12" itemprop="dateModified" datetime="2020-09-23T21:44:12+08:00">2020-09-23</time>
+                <time title="修改时间：2020-09-24 16:25:35" itemprop="dateModified" datetime="2020-09-24T16:25:35+08:00">2020-09-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -281,9 +281,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="CentOS7-4下安装Oracle-11gR2"><a href="#CentOS7-4下安装Oracle-11gR2" class="headerlink" title="CentOS7.4下安装Oracle 11gR2"></a>CentOS7.4下安装Oracle 11gR2</h1><h6 id="参考链接CentOS7-4下安装Oracle-11gR2"><a href="#参考链接CentOS7-4下安装Oracle-11gR2" class="headerlink" title="参考链接CentOS7.4下安装Oracle 11gR2"></a>参考链接<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_32786873/article/details/82110235">CentOS7.4下安装Oracle 11gR2</a></h6><h2 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h2><p>系统：CentOS7.4  4核4G  磁盘50G</p>
+        <p><em>参考链接</em><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_32786873/article/details/82110235">CentOS7.4下安装Oracle 11gR2</a></p>
+<h1 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h1><p>系统：CentOS7.4  4核4G  磁盘50G</p>
 <p>Oracle软件版本：linux.x64_11gR2_database_1of2.zip ； linux.x64_11gR2_database_2of2.zip</p>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>安装依赖包：验证相关包是否安装。</p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>安装依赖包：验证相关包是否安装。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#rpm -qa binutils compat-libstdc++-33 elfutils-libelf elfutils-libelf-devel elfutils-libelf-devel-static gcc gcc-c++ glibc glibc-common glibc-devel glibc-headers glibc-static kernel-headers pdksh libaio libaio-devel libgcc libgomp libstdc++ libstdc++-devel libstdc++-static make numactl-devel sysstat unixODBC unixODBC-devel</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 
@@ -323,23 +324,24 @@
 <p>安装完后检查命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -q binutils compat-libcap1 compat-libstdc++-33 gcc gcc-c++ glibc glibc-devel ksh libaio libaio-devel libgcc libstdc++ libstdc++-devel libXi libXtst make sysstat unixODBC unixODBC-devel | grep &quot;not installed&quot;</span><br></pre></td></tr></table></figure>
 
-<h2 id="一、下载Oracle"><a href="#一、下载Oracle" class="headerlink" title="一、下载Oracle"></a>一、下载Oracle</h2><h6 id="官方下载地址：download"><a href="#官方下载地址：download" class="headerlink" title="官方下载地址：download"></a>官方下载地址：<a target="_blank" rel="noopener" href="https://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html">download</a></h6><p>官网下载需要登陆Oracle账号，没有的可以注册一个。</p>
+<h1 id="下载Oracle"><a href="#下载Oracle" class="headerlink" title="下载Oracle"></a>下载Oracle</h1><h6 id="官方下载地址：download"><a href="#官方下载地址：download" class="headerlink" title="官方下载地址：download"></a>官方下载地址：<a target="_blank" rel="noopener" href="https://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html">download</a></h6><p>官网下载需要登陆Oracle账号，没有的可以注册一个。</p>
 <p>这里我分享一个百度云盘的下载链接(只有64位的)：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1gsyVwVs0C0KjvHE5xgN5YA">百度云下载</a> 密码：v65p</p>
-<h2 id="二、关闭安全措施"><a href="#二、关闭安全措施" class="headerlink" title="二、关闭安全措施"></a>二、关闭安全措施</h2><h3 id="1-关闭防火墙："><a href="#1-关闭防火墙：" class="headerlink" title="1.关闭防火墙："></a>1.关闭防火墙：</h3><p><code>systemctl stop firewalld</code> (由于是测试环境，为了方便，将防火墙关闭。但是，在正式的生产环境，千万不要这样做。)<br>当然我们也可以不关闭防火墙，只需要开放1521端口(oracle默认是1521端口，如果你修改为其它的端口了，这里就要开放对应的端口)</p>
+<h1 id="关闭安全措施"><a href="#关闭安全措施" class="headerlink" title="关闭安全措施"></a>关闭安全措施</h1><h2 id="1-关闭防火墙："><a href="#1-关闭防火墙：" class="headerlink" title="1.关闭防火墙："></a>1.关闭防火墙：</h2><p><code>systemctl stop firewalld</code> (由于是测试环境，为了方便，将防火墙关闭。但是，在正式的生产环境，千万不要这样做。)<br>当然我们也可以不关闭防火墙，只需要开放1521端口(oracle默认是1521端口，如果你修改为其它的端口了，这里就要开放对应的端口)</p>
 <p><code>firewall-cmd --zone=public --add-port=1521/tcp --permanent   //放开1521端口 </code></p>
 <p><code>firewall-cmd --reload  //在不改变状态的条件下重新加载防火墙配置文件</code></p>
-<h4 id="其他常用命令："><a href="#其他常用命令：" class="headerlink" title="其他常用命令："></a>其他常用命令：</h4><p>查看防火墙的状态：<code>systemctl status firewalld</code></p>
+<p><strong>其他常用命令</strong>：</p>
+<p>查看防火墙的状态：<code>systemctl status firewalld</code></p>
 <p>启动防火墙服务：<code>systemctl start firewalld</code></p>
 <p>禁用防火墙：<code>systemctl disable firewalld</code></p>
 <p>重载配置文件：<code>firewall-cmd --reload</code></p>
 <p>查看已经开放的端口：<code>firewall-cmd --list-ports</code></p>
-<h3 id="2-关闭selinux（需重启生效）"><a href="#2-关闭selinux（需重启生效）" class="headerlink" title="2.关闭selinux（需重启生效）"></a>2.关闭selinux（需重启生效）</h3><p>selinux提供了很多Linux的系统安全措施，演示系统中，将其关闭，方便操作。需要注意的是，在正式生产环境下，千万不要这样做。</p>
+<h2 id="2-关闭selinux（需重启生效）"><a href="#2-关闭selinux（需重启生效）" class="headerlink" title="2.关闭selinux（需重启生效）"></a>2.关闭selinux（需重启生效）</h2><p>selinux提供了很多Linux的系统安全措施，演示系统中，将其关闭，方便操作。需要注意的是，在正式生产环境下，千万不要这样做。</p>
 <p>执行命令<code>getenforce(或者sestatus -v)</code>查看selinux的状态，初始安装的CentOS7是打开状态。</p>
 <p><code>vim /etc/selinux/config</code> 修改SELINUX的值为disabled</p>
 <p><img src="https://ftp.bmp.ovh/imgs/2020/09/f8e7128e02a02f23.png"></p>
 <p>修改了之后需要重启服务器，selinux才能生效（这一步非常重要），重启后可以通过getenforce(或者sestatus -v)命令来查看，值一定要disabled才行。</p>
 <p><img src="https://ftp.bmp.ovh/imgs/2020/09/9c61e833cc562049.png"></p>
-<h2 id="三、创建运行oracle数据库的用户和用户组"><a href="#三、创建运行oracle数据库的用户和用户组" class="headerlink" title="三、创建运行oracle数据库的用户和用户组"></a>三、创建运行oracle数据库的用户和用户组</h2><ol>
+<h1 id="创建运行oracle数据库的用户和用户组"><a href="#创建运行oracle数据库的用户和用户组" class="headerlink" title="创建运行oracle数据库的用户和用户组"></a>创建运行oracle数据库的用户和用户组</h1><ol>
 <li>[Solin@Solin ~]$ su root    #切换到root</li>
 <li>密码：</li>
 <li>[root@Solin Solin]# groupadd oinstall    #创建用户组oinstall</li>
@@ -355,7 +357,7 @@
 <li>[root@Solin Solin]# </li>
 </ol>
 <p>关于创建的这些用户组的说明，请参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_32786873/article/details/82187346">参考</a></p>
-<h2 id="四、修改oracle用户限制"><a href="#四、修改oracle用户限制" class="headerlink" title="四、修改oracle用户限制"></a>四、修改oracle用户限制</h2><p>执行<code>vim /etc/security/limits.conf</code>命令，编辑/etc/security/limits.conf文件，修改操作系统对oracle用户资源的限制。在该文件中添加如下行：</p>
+<h1 id="修改oracle用户限制"><a href="#修改oracle用户限制" class="headerlink" title="修改oracle用户限制"></a>修改oracle用户限制</h1><p>执行<code>vim /etc/security/limits.conf</code>命令，编辑/etc/security/limits.conf文件，修改操作系统对oracle用户资源的限制。在该文件中添加如下行：</p>
 <ol>
 <li>oracle soft nproc 2047</li>
 <li>oracle hard nproc 16384</li>
@@ -377,7 +379,7 @@
 <li>fi</li>
 <li>fi</li>
 </ol>
-<h2 id="五、调整内核参数"><a href="#五、调整内核参数" class="headerlink" title="五、调整内核参数"></a>五、调整内核参数</h2><p><img src="https://ftp.bmp.ovh/imgs/2020/09/2c73e58344960a26.png"></p>
+<h1 id="调整内核参数"><a href="#调整内核参数" class="headerlink" title="调整内核参数"></a>调整内核参数</h1><p><img src="https://ftp.bmp.ovh/imgs/2020/09/2c73e58344960a26.png"></p>
 <p>编辑/etc/sysctl.conf文件，设置相关参数的系统默认值。如果该文件中已有相关参数的设置，则确保参数值不小于如下对应值；如果还没有相关参数的设置，则按照如下格式添加相应的参数设置行。 </p>
 <ol>
 <li>fs.file-max = 6815744</li>
@@ -395,14 +397,14 @@
 <p>要使 /etc/sysctl.conf 更改立即生效，执行以下命令。 输入：sysctl -p 显示如下：</p>
 <p>(-p：从指定的文件加载系统参数，如不指定即从/etc/sysctl.conf中加载)</p>
 <p><img src="https://ftp.bmp.ovh/imgs/2020/09/ce0f123fdec4d710.png"></p>
-<h2 id="六、创建数据库软件目录和数据文件存放目录（目录的位置，根据自己的情况来定），并改变相应的权限"><a href="#六、创建数据库软件目录和数据文件存放目录（目录的位置，根据自己的情况来定），并改变相应的权限" class="headerlink" title="六、创建数据库软件目录和数据文件存放目录（目录的位置，根据自己的情况来定），并改变相应的权限"></a>六、创建数据库软件目录和数据文件存放目录（目录的位置，根据自己的情况来定），并改变相应的权限</h2><ol>
+<h1 id="创建数据库软件目录和数据文件存放目录（目录的位置，根据自己的情况来定），并改变相应的权限"><a href="#创建数据库软件目录和数据文件存放目录（目录的位置，根据自己的情况来定），并改变相应的权限" class="headerlink" title="创建数据库软件目录和数据文件存放目录（目录的位置，根据自己的情况来定），并改变相应的权限"></a>创建数据库软件目录和数据文件存放目录（目录的位置，根据自己的情况来定），并改变相应的权限</h1><ol>
 <li>mkdir -p /opt/oracle/product    #创建oracle安装目录</li>
 <li>mkdir -p /opt/oracle/oradata    #创建oracle数据文件存放目录</li>
 <li>mkdir -p /opt/oracle/oraInventory    #创建oracle数据库清单目录 </li>
 <li>chown -R oracle:oinstall /opt/oracle    #设置oracle用户为目录的所有者</li>
 <li>chmod -R 775 /opt/oracle/    #修改权限</li>
 </ol>
-<h2 id="七、配置oracle用户的环境变量"><a href="#七、配置oracle用户的环境变量" class="headerlink" title="七、配置oracle用户的环境变量"></a>七、配置oracle用户的环境变量</h2><p>1.切换到新创建的oracle用户下：<code>su oracle</code></p>
+<h1 id="配置oracle用户的环境变量"><a href="#配置oracle用户的环境变量" class="headerlink" title="配置oracle用户的环境变量"></a>配置oracle用户的环境变量</h1><p>1.切换到新创建的oracle用户下：<code>su oracle</code></p>
 <p>2.输入命令：<code>vim /home/oracle/.bash_profile</code></p>
 <p>3.按 i 进入编辑模式，增加以下内容</p>
 <ol>
@@ -423,7 +425,7 @@
 <li>export PATH</li>
 </ol>
 <p>4.执行命令source /home/oracle/.bash_profile，让配置立即生效。</p>
-<h2 id="八、安装Oracle"><a href="#八、安装Oracle" class="headerlink" title="八、安装Oracle"></a>八、安装Oracle</h2><p>转下一篇</p>
+<h1 id="安装Oracle"><a href="#安装Oracle" class="headerlink" title="安装Oracle"></a>安装Oracle</h1><p>转下一篇</p>
 
     </div>
 
@@ -504,7 +506,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CentOS7-4%E4%B8%8B%E5%AE%89%E8%A3%85Oracle-11gR2"><span class="nav-number">1.</span> <span class="nav-text">CentOS7.4下安装Oracle 11gR2</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5CentOS7-4%E4%B8%8B%E5%AE%89%E8%A3%85Oracle-11gR2"><span class="nav-number">1.0.0.0.0.1.</span> <span class="nav-text">参考链接CentOS7.4下安装Oracle 11gR2</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83"><span class="nav-number">1.1.</span> <span class="nav-text">安装环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%B8%8B%E8%BD%BDOracle"><span class="nav-number">1.3.</span> <span class="nav-text">一、下载Oracle</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%AE%98%E6%96%B9%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80%EF%BC%9Adownload"><span class="nav-number">1.3.0.0.0.1.</span> <span class="nav-text">官方下载地址：download</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%85%B3%E9%97%AD%E5%AE%89%E5%85%A8%E6%8E%AA%E6%96%BD"><span class="nav-number">1.4.</span> <span class="nav-text">二、关闭安全措施</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99%EF%BC%9A"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.关闭防火墙：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%9A"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">其他常用命令：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%85%B3%E9%97%ADselinux%EF%BC%88%E9%9C%80%E9%87%8D%E5%90%AF%E7%94%9F%E6%95%88%EF%BC%89"><span class="nav-number">1.4.2.</span> <span class="nav-text">2.关闭selinux（需重启生效）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%88%9B%E5%BB%BA%E8%BF%90%E8%A1%8Coracle%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E7%94%A8%E6%88%B7%E5%92%8C%E7%94%A8%E6%88%B7%E7%BB%84"><span class="nav-number">1.5.</span> <span class="nav-text">三、创建运行oracle数据库的用户和用户组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E4%BF%AE%E6%94%B9oracle%E7%94%A8%E6%88%B7%E9%99%90%E5%88%B6"><span class="nav-number">1.6.</span> <span class="nav-text">四、修改oracle用户限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E8%B0%83%E6%95%B4%E5%86%85%E6%A0%B8%E5%8F%82%E6%95%B0"><span class="nav-number">1.7.</span> <span class="nav-text">五、调整内核参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BD%AF%E4%BB%B6%E7%9B%AE%E5%BD%95%E5%92%8C%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6%E5%AD%98%E6%94%BE%E7%9B%AE%E5%BD%95%EF%BC%88%E7%9B%AE%E5%BD%95%E7%9A%84%E4%BD%8D%E7%BD%AE%EF%BC%8C%E6%A0%B9%E6%8D%AE%E8%87%AA%E5%B7%B1%E7%9A%84%E6%83%85%E5%86%B5%E6%9D%A5%E5%AE%9A%EF%BC%89%EF%BC%8C%E5%B9%B6%E6%94%B9%E5%8F%98%E7%9B%B8%E5%BA%94%E7%9A%84%E6%9D%83%E9%99%90"><span class="nav-number">1.8.</span> <span class="nav-text">六、创建数据库软件目录和数据文件存放目录（目录的位置，根据自己的情况来定），并改变相应的权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E9%85%8D%E7%BD%AEoracle%E7%94%A8%E6%88%B7%E7%9A%84%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">1.9.</span> <span class="nav-text">七、配置oracle用户的环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E5%AE%89%E8%A3%85Oracle"><span class="nav-number">1.10.</span> <span class="nav-text">八、安装Oracle</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">安装环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BDOracle"><span class="nav-number">3.</span> <span class="nav-text">下载Oracle</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%AE%98%E6%96%B9%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80%EF%BC%9Adownload"><span class="nav-number">3.0.0.0.0.1.</span> <span class="nav-text">官方下载地址：download</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E5%AE%89%E5%85%A8%E6%8E%AA%E6%96%BD"><span class="nav-number">4.</span> <span class="nav-text">关闭安全措施</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99%EF%BC%9A"><span class="nav-number">4.1.</span> <span class="nav-text">1.关闭防火墙：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%85%B3%E9%97%ADselinux%EF%BC%88%E9%9C%80%E9%87%8D%E5%90%AF%E7%94%9F%E6%95%88%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">2.关闭selinux（需重启生效）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%BF%90%E8%A1%8Coracle%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E7%94%A8%E6%88%B7%E5%92%8C%E7%94%A8%E6%88%B7%E7%BB%84"><span class="nav-number">5.</span> <span class="nav-text">创建运行oracle数据库的用户和用户组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9oracle%E7%94%A8%E6%88%B7%E9%99%90%E5%88%B6"><span class="nav-number">6.</span> <span class="nav-text">修改oracle用户限制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B0%83%E6%95%B4%E5%86%85%E6%A0%B8%E5%8F%82%E6%95%B0"><span class="nav-number">7.</span> <span class="nav-text">调整内核参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BD%AF%E4%BB%B6%E7%9B%AE%E5%BD%95%E5%92%8C%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6%E5%AD%98%E6%94%BE%E7%9B%AE%E5%BD%95%EF%BC%88%E7%9B%AE%E5%BD%95%E7%9A%84%E4%BD%8D%E7%BD%AE%EF%BC%8C%E6%A0%B9%E6%8D%AE%E8%87%AA%E5%B7%B1%E7%9A%84%E6%83%85%E5%86%B5%E6%9D%A5%E5%AE%9A%EF%BC%89%EF%BC%8C%E5%B9%B6%E6%94%B9%E5%8F%98%E7%9B%B8%E5%BA%94%E7%9A%84%E6%9D%83%E9%99%90"><span class="nav-number">8.</span> <span class="nav-text">创建数据库软件目录和数据文件存放目录（目录的位置，根据自己的情况来定），并改变相应的权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEoracle%E7%94%A8%E6%88%B7%E7%9A%84%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">9.</span> <span class="nav-text">配置oracle用户的环境变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Oracle"><span class="nav-number">10.</span> <span class="nav-text">安装Oracle</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
