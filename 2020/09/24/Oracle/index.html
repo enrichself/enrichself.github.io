@@ -20,25 +20,47 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="参考链接CentOS7.4下安装Oracle 11gR2 安装环境系统：CentOS7.4  4核4G  磁盘50G Oracle软件版本：linux.x64_11gR2_database_1of2.zip ； linux.x64_11gR2_database_2of2.zip 准备工作安装依赖包：验证相关包是否安装。 1#rpm -qa binutils compat-libstdc++-33">
+  <meta name="description" content="Oracle服务端安装及配置(centos7)安装过程较复杂本次安装主要参考两篇博客附上链接:https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_32786873&#x2F;article&#x2F;details&#x2F;82110235 (主要参考) https:&#x2F;&#x2F;blog.csdn.net&#x2F;eussi&#x2F;article&#x2F;details&#x2F;79054708 (辅助参考，主要用于解决安装过程中出现的问题，解决方法中有的要对照这">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CentOS7.4下安装Oracle 11gR2">
-<meta property="og:url" content="http://example.com/2020/09/20/CentOS/index.html">
+<meta property="og:title" content="实现虚拟机linux系统中oracle数据库和宿主机window10系统的互访的出现问题及解决方法">
+<meta property="og:url" content="http://example.com/2020/09/24/Oracle/index.html">
 <meta property="og:site_name" content="Advance">
-<meta property="og:description" content="参考链接CentOS7.4下安装Oracle 11gR2 安装环境系统：CentOS7.4  4核4G  磁盘50G Oracle软件版本：linux.x64_11gR2_database_1of2.zip ； linux.x64_11gR2_database_2of2.zip 准备工作安装依赖包：验证相关包是否安装。 1#rpm -qa binutils compat-libstdc++-33">
+<meta property="og:description" content="Oracle服务端安装及配置(centos7)安装过程较复杂本次安装主要参考两篇博客附上链接:https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_32786873&#x2F;article&#x2F;details&#x2F;82110235 (主要参考) https:&#x2F;&#x2F;blog.csdn.net&#x2F;eussi&#x2F;article&#x2F;details&#x2F;79054708 (辅助参考，主要用于解决安装过程中出现的问题，解决方法中有的要对照这">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://ftp.bmp.ovh/imgs/2020/09/f8e7128e02a02f23.png">
-<meta property="og:image" content="https://ftp.bmp.ovh/imgs/2020/09/9c61e833cc562049.png">
-<meta property="og:image" content="https://ftp.bmp.ovh/imgs/2020/09/2c73e58344960a26.png">
-<meta property="og:image" content="https://ftp.bmp.ovh/imgs/2020/09/ce0f123fdec4d710.png">
-<meta property="article:published_time" content="2020-09-20T13:35:57.000Z">
-<meta property="article:modified_time" content="2020-09-24T08:53:53.913Z">
+<meta property="og:image" content="https://kyun.ltyuanfang.cn/tc/2020/09/24/37e2a06f03b73.png">
+<meta property="og:image" content="https://kyun.ltyuanfang.cn/tc/2020/09/24/03b6802e95c15.png">
+<meta property="og:image" content="https://kyun.ltyuanfang.cn/tc/2020/09/24/99a559b88db96.png">
+<meta property="og:image" content="https://kyun.ltyuanfang.cn/tc/2020/09/24/e404ae522244b.png">
+<meta property="og:image" content="https://kyun.ltyuanfang.cn/tc/2020/09/24/cc93b23b887e8.png">
+<meta property="og:image" content="https://kyun.ltyuanfang.cn/tc/2020/09/24/3f15d49697361.png">
+<meta property="og:image" content="https://kyun.ltyuanfang.cn/tc/2020/09/24/93f84cd3ca197.png">
+<meta property="og:image" content="https://kyun.ltyuanfang.cn/tc/2020/09/24/a23277de5efd2.png">
+<meta property="og:image" content="https://kyun.ltyuanfang.cn/tc/2020/09/24/e90b3cc69f3f6.png">
+<meta property="og:image" content="https://kyun.ltyuanfang.cn/tc/2020/09/24/03c0361987de2.png">
+<meta property="og:image" content="https://ftp.bmp.ovh/imgs/2020/09/bf14d0fc6d57cf8f.png">
+<meta property="og:image" content="https://ftp.bmp.ovh/imgs/2020/09/a7f28aa85a21ae1a.png">
+<meta property="og:image" content="https://ftp.bmp.ovh/imgs/2020/09/e4b12706366a8748.png">
+<meta property="og:image" content="https://ftp.bmp.ovh/imgs/2020/09/65856d3b5de263fa.png">
+<meta property="og:image" content="https://ftp.bmp.ovh/imgs/2020/09/eacd7d9b63ca674f.png">
+<meta property="og:image" content="https://ftp.bmp.ovh/imgs/2020/09/a332160df9689376.png">
+<meta property="og:image" content="https://ftp.bmp.ovh/imgs/2020/09/3243ed47796d7aaf.png">
+<meta property="og:image" content="https://ftp.bmp.ovh/imgs/2020/09/8bf0582ee63a81d6.jpg">
+<meta property="og:image" content="https://ftp.bmp.ovh/imgs/2020/09/4c0144432dcd3dbf.png">
+<meta property="og:image" content="https://ftp.bmp.ovh/imgs/2020/09/fc3a9d46756c94ef.png">
+<meta property="og:image" content="https://ftp.bmp.ovh/imgs/2020/09/fc3a9d46756c94ef.png">
+<meta property="og:image" content="https://ftp.bmp.ovh/imgs/2020/09/216a297b99d19255.png">
+<meta property="og:image" content="https://ftp.bmp.ovh/imgs/2020/09/e6287a19892143b1.png">
+<meta property="og:image" content="https://kyun.ltyuanfang.cn/tc/2020/09/24/94d9c7e4a96be.png">
+<meta property="og:image" content="https://kyun.ltyuanfang.cn/tc/2020/09/24/50f2d59570308.jpg">
+<meta property="og:image" content="https://kyun.ltyuanfang.cn/tc/2020/09/24/49958923b595f.jpg">
+<meta property="article:published_time" content="2020-09-24T13:35:57.000Z">
+<meta property="article:modified_time" content="2020-09-24T13:30:09.193Z">
 <meta property="article:author" content="陈玉飞">
 <meta property="article:tag" content="Oracle">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://ftp.bmp.ovh/imgs/2020/09/f8e7128e02a02f23.png">
+<meta name="twitter:image" content="https://kyun.ltyuanfang.cn/tc/2020/09/24/37e2a06f03b73.png">
 
-<link rel="canonical" href="http://example.com/2020/09/20/CentOS/">
+<link rel="canonical" href="http://example.com/2020/09/24/Oracle/">
 
 
 <script id="page-configurations">
@@ -51,7 +73,7 @@
   };
 </script>
 
-  <title>CentOS7.4下安装Oracle 11gR2 | Advance</title>
+  <title>实现虚拟机linux系统中oracle数据库和宿主机window10系统的互访的出现问题及解决方法 | Advance</title>
   
 
 
@@ -207,7 +229,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/09/20/CentOS/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/09/24/Oracle/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/touxiang.jpg">
@@ -220,7 +242,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          CentOS7.4下安装Oracle 11gR2
+          实现虚拟机linux系统中oracle数据库和宿主机window10系统的互访的出现问题及解决方法
         </h1>
 
         <div class="post-meta">
@@ -229,16 +251,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-09-20 21:35:57" itemprop="dateCreated datePublished" datetime="2020-09-20T21:35:57+08:00">2020-09-20</time>
+              <time title="创建时间：2020-09-24 21:35:57 / 修改时间：21:30:09" itemprop="dateCreated datePublished" datetime="2020-09-24T21:35:57+08:00">2020-09-24</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-24 16:53:53" itemprop="dateModified" datetime="2020-09-24T16:53:53+08:00">2020-09-24</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -262,14 +278,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>4.7k</span>
+              <span>3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -281,152 +297,124 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><em>参考链接</em><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_32786873/article/details/82110235">CentOS7.4下安装Oracle 11gR2</a></p>
-<h1 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h1><p>系统：CentOS7.4  4核4G  磁盘50G</p>
-<p>Oracle软件版本：linux.x64_11gR2_database_1of2.zip ； linux.x64_11gR2_database_2of2.zip</p>
-<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>安装依赖包：验证相关包是否安装。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#rpm -qa binutils compat-libstdc++-33 elfutils-libelf elfutils-libelf-devel elfutils-libelf-devel-static gcc gcc-c++ glibc glibc-common glibc-devel glibc-headers glibc-static kernel-headers pdksh libaio libaio-devel libgcc libgomp libstdc++ libstdc++-devel libstdc++-static make numactl-devel sysstat unixODBC unixODBC-devel</span><br></pre></td></tr></table></figure>
+        <h1 id="Oracle服务端安装及配置-centos7"><a href="#Oracle服务端安装及配置-centos7" class="headerlink" title="Oracle服务端安装及配置(centos7)"></a>Oracle服务端安装及配置(centos7)</h1><p>安装过程较复杂本次安装主要参考两篇博客附上链接:<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_32786873/article/details/82110235">https://blog.csdn.net/qq_32786873/article/details/82110235</a></p>
+<p>(主要参考)</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/eussi/article/details/79054708">https://blog.csdn.net/eussi/article/details/79054708</a></p>
+<p>(辅助参考，主要用于解决安装过程中出现的问题，解决方法中有的要对照这篇博文但是目录要相应的改变。)</p>
 <a id="more"></a>
 
-<p>kernel-headers-3.10.0-123.el7.x86_64</p>
-<p>gcc-c++-4.8.2-16.el7.x86_64</p>
-<p>numactl-devel-2.0.9-2.el7.x86_64</p>
-<p>glibc-headers-2.17-55.el7.x86_64</p>
-<p>glibc-common-2.17-55.el7.x86_64</p>
-<p>binutils-2.23.52.0.1-16.el7.x86_64</p>
-<p>unixODBC-devel-2.3.1-10.el7.x86_64</p>
-<p>libaio-0.3.109-12.el7.x86_64</p>
-<p>make-3.82-21.el7.x86_64</p>
-<p>elfutils-libelf-0.158-3.el7.x86_64</p>
-<p>elfutils-libelf-devel-0.158-3.el7.x86_64</p>
-<p>sysstat-10.1.5-4.el7.x86_64</p>
-<p>glibc-static-2.17-55.el7.x86_64</p>
-<p>glibc-devel-2.17-55.el7.x86_64</p>
-<p>glibc-2.17-55.el7.x86_64</p>
-<p>elfutils-libelf-devel-static-0.158-3.el7.x86_64</p>
-<p>libaio-0.3.109-12.el7.i686 gcc-4.8.2-16.el7.x86_64</p>
-<p>gcc-4.8.2-16.el7.x86_64</p>
-<p>libgcc-4.8.2-16.el7.i686</p>
-<p>libstdc++-static-4.8.2-16.el7.x86_64</p>
-<p>libaio-devel-0.3.109-12.el7.x86_64</p>
-<p>libstdc++-4.8.2-16.el7.x86_64</p>
-<p>libaio-devel-0.3.109-12.el7.i686</p>
-<p>unixODBC-2.3.1-10.el7.x86_64</p>
-<p>libstdc++-devel-4.8.2-16.el7.x86_64</p>
-<p>compat-libstdc++-33-3.2.3-71.el7.x86_64</p>
-<p>libgcc-4.8.2-16.el7.x86_64</p>
-<p>libgomp-4.8.2-16.el7.x86_64</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#yum 安装包名</span><br></pre></td></tr></table></figure>
-
-<p>安装命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install binutils compat-libcap1 compat-libstdc++-33 gcc gcc-c++ glibc glibc-devel ksh libaio libaio-devel libgcc libstdc++ libstdc++-devel libXi libXtst make sysstat unixODBC unixODBC-devel</span><br></pre></td></tr></table></figure>
-
-<p>安装完后检查命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -q binutils compat-libcap1 compat-libstdc++-33 gcc gcc-c++ glibc glibc-devel ksh libaio libaio-devel libgcc libstdc++ libstdc++-devel libXi libXtst make sysstat unixODBC unixODBC-devel | grep &quot;not installed&quot;</span><br></pre></td></tr></table></figure>
-
-<h1 id="下载Oracle"><a href="#下载Oracle" class="headerlink" title="下载Oracle"></a>下载Oracle</h1><p><em>官方下载地址</em>：<a target="_blank" rel="noopener" href="https://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html">download</a></p>
-<p>官网下载需要登陆Oracle账号，没有的可以注册一个。</p>
-<p>这里我分享一个百度云盘的下载链接(只有64位的)：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1gsyVwVs0C0KjvHE5xgN5YA">百度云下载</a> 密码：v65p</p>
-<h1 id="关闭安全措施"><a href="#关闭安全措施" class="headerlink" title="关闭安全措施"></a>关闭安全措施</h1><h2 id="关闭防火墙："><a href="#关闭防火墙：" class="headerlink" title="关闭防火墙："></a>关闭防火墙：</h2><p><code>systemctl stop firewalld</code> (由于是测试环境，为了方便，将防火墙关闭。但是，在正式的生产环境，千万不要这样做。)<br>当然我们也可以不关闭防火墙，只需要开放1521端口(oracle默认是1521端口，如果你修改为其它的端口了，这里就要开放对应的端口)</p>
-<p><code>firewall-cmd --zone=public --add-port=1521/tcp --permanent   //放开1521端口 </code></p>
-<p><code>firewall-cmd --reload  //在不改变状态的条件下重新加载防火墙配置文件</code></p>
-<p><strong>其他常用命令</strong>：</p>
-<p>查看防火墙的状态：<code>systemctl status firewalld</code></p>
-<p>启动防火墙服务：<code>systemctl start firewalld</code></p>
-<p>禁用防火墙：<code>systemctl disable firewalld</code></p>
-<p>重载配置文件：<code>firewall-cmd --reload</code></p>
-<p>查看已经开放的端口：<code>firewall-cmd --list-ports</code></p>
-<h2 id="关闭selinux（需重启生效）"><a href="#关闭selinux（需重启生效）" class="headerlink" title="关闭selinux（需重启生效）"></a>关闭selinux（需重启生效）</h2><p>selinux提供了很多Linux的系统安全措施，演示系统中，将其关闭，方便操作。需要注意的是，在正式生产环境下，千万不要这样做。</p>
-<p>执行命令<code>getenforce(或者sestatus -v)</code>查看selinux的状态，初始安装的CentOS7是打开状态。</p>
-<p><code>vim /etc/selinux/config</code> 修改SELINUX的值为disabled</p>
-<p><img src="https://ftp.bmp.ovh/imgs/2020/09/f8e7128e02a02f23.png"></p>
-<p>修改了之后需要重启服务器，selinux才能生效（这一步非常重要），重启后可以通过getenforce(或者sestatus -v)命令来查看，值一定要disabled才行。</p>
-<p><img src="https://ftp.bmp.ovh/imgs/2020/09/9c61e833cc562049.png"></p>
-<h1 id="创建运行oracle数据库的用户和用户组"><a href="#创建运行oracle数据库的用户和用户组" class="headerlink" title="创建运行oracle数据库的用户和用户组"></a>创建运行oracle数据库的用户和用户组</h1><ol>
-<li>[Solin@Solin ~]$ su root    #切换到root</li>
-<li>密码：</li>
-<li>[root@Solin Solin]# groupadd oinstall    #创建用户组oinstall</li>
-<li>[root@Solin Solin]# groupadd dba    #创建用户组dba</li>
-<li>[root@Solin Solin]# useradd -g oinstall -G dba -m oracle    #创建oracle用户，并加入到oinstall和dba用户组</li>
-<li>[root@Solin Solin]# passwd oracle    #设置用户oracle的登陆密码，不设置密码，在CentOS的图形登陆界面没法登陆</li>
-<li>更改用户 oracle 的密码 。</li>
-<li>新的 密码：</li>
-<li>重新输入新的 密码：</li>
-<li>passwd：所有的身份验证令牌已经成功更新。</li>
-<li>[root@Solin Solin]# id oracle    # 查看新建的oracle用户</li>
-<li>uid=1001(oracle) gid=1001(oinstall) 组=1001(oinstall),1002(dba)</li>
-<li>[root@Solin Solin]# </li>
-</ol>
-<p>关于创建的这些用户组的说明，请参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_32786873/article/details/82187346">参考</a></p>
-<h1 id="修改oracle用户限制"><a href="#修改oracle用户限制" class="headerlink" title="修改oracle用户限制"></a>修改oracle用户限制</h1><p>执行<code>vim /etc/security/limits.conf</code>命令，编辑/etc/security/limits.conf文件，修改操作系统对oracle用户资源的限制。在该文件中添加如下行：</p>
-<ol>
-<li>oracle soft nproc 2047</li>
-<li>oracle hard nproc 16384</li>
-<li>oracle soft nofile 1024</li>
-<li>oracle hard nofile 65536</li>
-</ol>
-<p>关于limits.conf的配置请参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_32786873/article/details/82190224">参考</a></p>
-<p>要使limits.conf文件配置生效，必须要确保pam_limits.so文件被加入到启动文件中。</p>
-<p>编辑文件：vim /etc/pam.d/login，加入以下语句:</p>
-<p><code>session    required     pam_limits.so</code></p>
-<p>编辑 /etc/profile ，输入命令：<code>vim /etc/profile</code>，按 i 键进入编辑模式，将下列内容加入该文件。</p>
-<ol>
-<li>if [ $USER = “oracle” ]; then</li>
-<li>if [ $SHELL = “/bin/ksh” ]; then</li>
-<li>ulimit -p 16384</li>
-<li>ulimit -n 65536</li>
-<li>else</li>
-<li>ulimit -u 16384 -n 65536</li>
-<li>fi</li>
-<li>fi</li>
-</ol>
-<h1 id="调整内核参数"><a href="#调整内核参数" class="headerlink" title="调整内核参数"></a>调整内核参数</h1><p><img src="https://ftp.bmp.ovh/imgs/2020/09/2c73e58344960a26.png"></p>
-<p>编辑/etc/sysctl.conf文件，设置相关参数的系统默认值。如果该文件中已有相关参数的设置，则确保参数值不小于如下对应值；如果还没有相关参数的设置，则按照如下格式添加相应的参数设置行。 </p>
-<ol>
-<li>fs.file-max = 6815744</li>
-<li>fs.aio-max-nr = 1048576</li>
-<li>kernel.shmall = 2097152</li>
-<li>kernel.shmmax = 2147483648</li>
-<li>kernel.shmmni = 4096</li>
-<li>kernel.sem = 250 32000 100 128</li>
-<li>net.ipv4.ip_local_port_range = 9000 65500</li>
-<li>net.core.rmem_default = 262144</li>
-<li>net.core.rmem_max = 4194304</li>
-<li>net.core.wmem_default = 262144</li>
-<li>net.core.wmem_max = 1048576</li>
-</ol>
-<p>要使 /etc/sysctl.conf 更改立即生效，执行以下命令。 输入：sysctl -p 显示如下：</p>
-<p>(-p：从指定的文件加载系统参数，如不指定即从/etc/sysctl.conf中加载)</p>
-<p><img src="https://ftp.bmp.ovh/imgs/2020/09/ce0f123fdec4d710.png"></p>
-<h1 id="创建数据库软件目录和数据文件存放目录（目录的位置，根据自己的情况来定），并改变相应的权限"><a href="#创建数据库软件目录和数据文件存放目录（目录的位置，根据自己的情况来定），并改变相应的权限" class="headerlink" title="创建数据库软件目录和数据文件存放目录（目录的位置，根据自己的情况来定），并改变相应的权限"></a>创建数据库软件目录和数据文件存放目录（目录的位置，根据自己的情况来定），并改变相应的权限</h1><ol>
-<li>mkdir -p /opt/oracle/product    #创建oracle安装目录</li>
-<li>mkdir -p /opt/oracle/oradata    #创建oracle数据文件存放目录</li>
-<li>mkdir -p /opt/oracle/oraInventory    #创建oracle数据库清单目录 </li>
-<li>chown -R oracle:oinstall /opt/oracle    #设置oracle用户为目录的所有者</li>
-<li>chmod -R 775 /opt/oracle/    #修改权限</li>
-</ol>
-<h1 id="配置oracle用户的环境变量"><a href="#配置oracle用户的环境变量" class="headerlink" title="配置oracle用户的环境变量"></a>配置oracle用户的环境变量</h1><p>1.切换到新创建的oracle用户下：<code>su oracle</code></p>
-<p>2.输入命令：<code>vim /home/oracle/.bash_profile</code></p>
-<p>3.按 i 进入编辑模式，增加以下内容</p>
-<ol>
-<li>export ORACLE_BASE=/opt/oracle</li>
-<li>export ORACLE_HOME=$ORACLE_BASE/product/11.2.0/dbhome_1</li>
-<li>export ORACLE_SID=orcl</li>
-<li>export ORACLE_TERM=xterm</li>
-<li>export TNS_ADMIN=$ORACLE_HOME/network/admin</li>
-<li>export LD_LIBRARY_PATH=$ORACLE_HOME/lib:/usr/lib</li>
-<li></li>
-<li>#不加下面的2行，我安装的时候界面都是乱码</li>
-<li>export NLS_LANG=AMERICAN_AMERICA.UTF8</li>
-<li>export LANG=en_US.UTF8</li>
-<li></li>
-<li></li>
-<li>PATH=$PATH:$HOME/.local/bin:$HOME/bin:$ORACLE_HOME/bin</li>
-<li></li>
-<li>export PATH</li>
-</ol>
-<p>4.执行命令source /home/oracle/.bash_profile，让配置立即生效。</p>
-<h1 id="安装Oracle"><a href="#安装Oracle" class="headerlink" title="安装Oracle"></a>安装Oracle</h1><p>转下一篇</p>
+<h1 id="Oracle客户端以及PL-SQL-Developer安装及配置问题-window10"><a href="#Oracle客户端以及PL-SQL-Developer安装及配置问题-window10" class="headerlink" title="Oracle客户端以及PL/SQL Developer安装及配置问题(window10)"></a>Oracle客户端以及PL/SQL Developer安装及配置问题(window10)</h1><h2 id="准备工作："><a href="#准备工作：" class="headerlink" title="准备工作："></a>准备工作：</h2><p>1.配置环境变量:</p>
+<ul>
+<li><p>系统变量：</p>
+<ul>
+<li><p>变量：ORACLE_HOME</p>
+</li>
+<li><p>值：E:\instantclient_11_2</p>
+</li>
+<li><p>变量：TNS_ADMIN</p>
+</li>
+<li><p>值：E:\instantclient_11_2 \network\admin</p>
+</li>
+</ul>
+</li>
+<li><p>用户变量：</p>
+<ul>
+<li><p>变量：NLS_LANG</p>
+</li>
+<li><p>值：AMERICAN_AMERICA.AL32UTF8<br>(切记不是AMERICAN_AMERICAN.AL32UTF8)网上很多是这样，切记要仔细！)</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://kyun.ltyuanfang.cn/tc/2020/09/24/37e2a06f03b73.png" alt="1.png"></p>
+<p><img src="https://kyun.ltyuanfang.cn/tc/2020/09/24/03b6802e95c15.png" alt="2.png"></p>
+<p>2.下载一个和自己win10系统符合的版本</p>
+<p><a target="_blank" rel="noopener" href="https://www.oracle.com/database/technologies/instant-client/downloads.html">https://www.oracle.com/database/technologies/instant-client/downloads.html</a></p>
+<p>（不要听网上的一定要下载32位的，要对应自己电脑（宿主机）也要最好对应数据库的版本）</p>
+<p><img src="https://kyun.ltyuanfang.cn/tc/2020/09/24/99a559b88db96.png" alt="3.png"></p>
+<p>3.下载PLSQL Developer（网上有绿色版、破解版，这里附一个好用）</p>
+<p><a target="_blank" rel="noopener" href="https://download.csdn.net/download/cuihwchn/9606423">https://download.csdn.net/download/cuihwchn/9606423</a></p>
+<h2 id="正式工作："><a href="#正式工作：" class="headerlink" title="正式工作："></a>正式工作：</h2><h3 id="配置虚拟机linux的oracle的监听文件"><a href="#配置虚拟机linux的oracle的监听文件" class="headerlink" title="配置虚拟机linux的oracle的监听文件"></a>配置虚拟机linux的oracle的监听文件</h3><p>**listener.ora **</p>
+<p>(这个文件在虚拟机里，更改的话可以用在linux系统里改也可以拷出来后更改替换，目录是<br>/opt/oracle/product/11.2.0/dbhome_1/network/admin)</p>
+<p><img src="https://kyun.ltyuanfang.cn/tc/2020/09/24/e404ae522244b.png" alt="4.png"></p>
+<p><img src="https://kyun.ltyuanfang.cn/tc/2020/09/24/cc93b23b887e8.png" alt="5.png"></p>
+<p><img src="https://kyun.ltyuanfang.cn/tc/2020/09/24/3f15d49697361.png" alt="6.png"></p>
+<h3 id="配置宿主机win10的环境"><a href="#配置宿主机win10的环境" class="headerlink" title="配置宿主机win10的环境"></a>配置宿主机win10的环境</h3><ul>
+<li>解压好下载的oracle客户端文件，客户端文件直接解压就可以，免安装的，在instantclient_11_2的文件夹下建立network/admin,之后把linux系统里的tnsnames.ora拷到win10的刚刚建立的这个admin文件夹下（可以用sftp传输）。</li>
+</ul>
+<p><img src="https://kyun.ltyuanfang.cn/tc/2020/09/24/93f84cd3ca197.png" alt="7.png"></p>
+<p><img src="https://kyun.ltyuanfang.cn/tc/2020/09/24/a23277de5efd2.png" alt="8.png"></p>
+<ul>
+<li>tnsnames.ora</li>
+</ul>
+<p><img src="https://kyun.ltyuanfang.cn/tc/2020/09/24/e90b3cc69f3f6.png" alt="9.png"></p>
+<ul>
+<li>配置环境变量</li>
+</ul>
+<p><img src="https://kyun.ltyuanfang.cn/tc/2020/09/24/03c0361987de2.png" alt="10.png"></p>
+<pre><code>+ 将刚才自己在win10建立的/network/admin文件夹的的位置设置成TNS_ADMIN的变量值（即上述准备工作里的配置环境变量，配置完了最好重启电脑）</code></pre>
+<p><img src="https://ftp.bmp.ovh/imgs/2020/09/bf14d0fc6d57cf8f.png"></p>
+<p><img src="https://ftp.bmp.ovh/imgs/2020/09/a7f28aa85a21ae1a.png"></p>
+<h3 id="PLSQL-Developer的安装和配置"><a href="#PLSQL-Developer的安装和配置" class="headerlink" title="PLSQL Developer的安装和配置"></a>PLSQL Developer的安装和配置</h3><p><img src="https://ftp.bmp.ovh/imgs/2020/09/e4b12706366a8748.png"></p>
+<p>解压下载好的PLSQL Developer的压缩包，对应的三个文件分别是 改成中文的插件、安装程序、永久激活码。先点击第二个安装程序，安装完毕后点击第一个文件汉化，进入软件后先不要登录做以下两个操作。</p>
+<p>1.依次找到会话，登录，配置，连接。然后将oracle主目录设置成你oracle客户端的解压包的位置（我这里是直接将解压后的文件放在了E盘）；将OCI库设置目录在后面加上oci.dll，然后点击确定，重启PLSQL Developer </p>
+<p><img src="https://ftp.bmp.ovh/imgs/2020/09/65856d3b5de263fa.png"></p>
+<p><img src="https://ftp.bmp.ovh/imgs/2020/09/eacd7d9b63ca674f.png"></p>
+<p><img src="https://ftp.bmp.ovh/imgs/2020/09/a332160df9689376.png"></p>
+<p>2.找到帮助，注册，然后将PLSQL Developer压缩包里的文本文件里的产品代号、序列号、密码输入进去就可以破解永久版。</p>
+<p><img src="https://ftp.bmp.ovh/imgs/2020/09/3243ed47796d7aaf.png"></p>
+<h3 id="问题总结："><a href="#问题总结：" class="headerlink" title="问题总结："></a>问题总结：</h3><p><strong>1．ORA-12541:TNS:no listener</strong></p>
+<p><img src="https://ftp.bmp.ovh/imgs/2020/09/8bf0582ee63a81d6.jpg"></p>
+<p>出现这个问题主要原因有二：</p>
+<p>1 没配置监听文件或者linux端没有启动监听；</p>
+<p>2 window端的tnsnames.ora文件没有修改或修改错误。Linux端的listener.ora文件没修改。</p>
+<p>对于第一种原因的解决方法：首先测试监听是否启动，在linux终端输入：<code>lsnrctl status   </code></p>
+<p>若没启动则启动监听： <code>lsnrctl start </code></p>
+<p>然后连接oracle数据库：<code> sqlplus / as sysdba</code></p>
+<p>启动oracle：<code>SQL&gt;startup</code></p>
+<p>对于第二种原因的解决办法:仔细对照前面的修改监听文件的内容，问题多数是出在了tnsnames.ora和listener.ora文件修改错误。</p>
+<p><strong>2.ORA-12170:TNS:Connect timeout occurred</strong></p>
+<p>这个问题的解决方法可以归并在上个问题里，之所以出现连接数据库超时或者连接不上数据库原因有多个，需一个一个核查。</p>
+<p>原因一：tnsnames.ora里的ip地址没修改对。</p>
+<p>解决方法：在linux终端输入 ifconfig 查看ipv4地址。若没有，则用打开设置找到网络设置，把wired打开，右下角设置自己设置ipv4的地址，并记住。</p>
+<p><img src="https://ftp.bmp.ovh/imgs/2020/09/4c0144432dcd3dbf.png"></p>
+<p><img src="https://ftp.bmp.ovh/imgs/2020/09/fc3a9d46756c94ef.png"></p>
+<p>原因二：linux系统的防火墙没关闭导致宿主机ping不通虚拟机。对照上述oracle服务端的安装或查阅网上相关内容自行关闭即可，较容易。</p>
+<p><strong>3.宿主机ping不通虚拟机。</strong></p>
+<p>可归为问题二里，此问题较为重要，单独列出。且解决方案多种，这里仅阐述本人的解决方法。</p>
+<p>解决方法：本文的整体思路是在window系统下安装oracle客户端及PLSQL Developer来访问虚拟机linux系统下的oracle服务端，关心点是宿主机能否ping通虚拟机。Window下打开cmd，输入<code>ping 192.168.50.178</code>（此ip是虚拟机里的ipv4地址，和虚拟机的ipv4并不是一回事，但最好要设置同一字段）我这里的ip陈列如下：</p>
+<p>宿主机：192.168.50.180</p>
+<p>虚拟机：192.168.50.179</p>
+<p>虚拟机里的linux：192.168.50.178</p>
+<p>注意这里全部是自己设置的，具体设置如下图</p>
+<p>另外虚拟机的网卡连接方式要设置为桥接方式（虚拟机需重启生效）</p>
+<p><img src="https://ftp.bmp.ovh/imgs/2020/09/fc3a9d46756c94ef.png"></p>
+<p><img src="https://ftp.bmp.ovh/imgs/2020/09/216a297b99d19255.png"></p>
+<p><img src="https://ftp.bmp.ovh/imgs/2020/09/e6287a19892143b1.png"></p>
+<p><img src="https://kyun.ltyuanfang.cn/tc/2020/09/24/94d9c7e4a96be.png" alt="12.png"></p>
+<p><strong>4.ORA-01034:ORACLE not available</strong></p>
+<p><strong>ORA-27101:shared memory realm does not exist</strong></p>
+<p><img src="https://kyun.ltyuanfang.cn/tc/2020/09/24/50f2d59570308.jpg" alt="13.jpg"></p>
+<p>解决方法：</p>
+<p>1.首先检查listener是否配置正确，上述有详细讲到，请对照着仔细检查修改。Listener配置没有问题进行下一步。</p>
+<p>2.在虚拟机终端输入: <code>sqlplus / as sysdba </code>  连接数据库，由于实例已经在启动的状态，这时候考虑到实例注册的问题：<br><code>SQL&gt;show parameter local_listener</code></p>
+<p>NAME                 TYPE                VALUE</p>
+<hr>
+<p>local_listener          string</p>
+<p>3.设置local_listener参数</p>
+<p><code>SQL&gt; alter system set local_listener =&#39;(ADDRESS=(PROTOCOL=TCP) (HOST=10.201.1.134)(PORT=1521)(SID=siebtest))&#39;;</code></p>
+<p>System altered</p>
+<p><code>SQL&gt; alter system register;</code></p>
+<p>System altered</p>
+<p>5.关闭监听：<code>lsnrctl stop</code></p>
+<p>再次启动监听：<code>lsnrctl start</code></p>
+<p>启动监听后再次连接数据库：<code>sqlplus / as sysdba</code></p>
+<p>启动数据库：<code>SQL&gt;startup</code></p>
+<p>再次登陆成功</p>
+<p><strong>5.ORA-12705:Cannot access NLS data files or invalid environment specified</strong></p>
+<p><img src="https://kyun.ltyuanfang.cn/tc/2020/09/24/49958923b595f.jpg" alt="14.jpg"></p>
+<p>解决方法：</p>
+<p>环境变量配置错误，按照上面所述仔细对照修改，本人出现的问题是将NLS_LANG=AMERICAN_AMERICA.AL32UTF8配置成了NLS_LANG=AMERICAN_AMERICAN.AL32UTF8,所以报错。</p>
 
     </div>
 
@@ -445,13 +433,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/09/20/hello-world/" rel="prev" title="Hello World">
-      <i class="fa fa-chevron-left"></i> Hello World
+    <a href="/2020/09/20/CentOS/" rel="prev" title="CentOS7.4下安装Oracle 11gR2">
+      <i class="fa fa-chevron-left"></i> CentOS7.4下安装Oracle 11gR2
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/09/24/Oracle/" rel="next" title="实现虚拟机linux系统中oracle数据库和宿主机window10系统的互访的出现问题及解决方法">
-      实现虚拟机linux系统中oracle数据库和宿主机window10系统的互访的出现问题及解决方法 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -510,7 +495,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">安装环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BDOracle"><span class="nav-number">3.</span> <span class="nav-text">下载Oracle</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E5%AE%89%E5%85%A8%E6%8E%AA%E6%96%BD"><span class="nav-number">4.</span> <span class="nav-text">关闭安全措施</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99%EF%BC%9A"><span class="nav-number">4.1.</span> <span class="nav-text">关闭防火墙：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E9%97%ADselinux%EF%BC%88%E9%9C%80%E9%87%8D%E5%90%AF%E7%94%9F%E6%95%88%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">关闭selinux（需重启生效）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%BF%90%E8%A1%8Coracle%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E7%94%A8%E6%88%B7%E5%92%8C%E7%94%A8%E6%88%B7%E7%BB%84"><span class="nav-number">5.</span> <span class="nav-text">创建运行oracle数据库的用户和用户组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9oracle%E7%94%A8%E6%88%B7%E9%99%90%E5%88%B6"><span class="nav-number">6.</span> <span class="nav-text">修改oracle用户限制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B0%83%E6%95%B4%E5%86%85%E6%A0%B8%E5%8F%82%E6%95%B0"><span class="nav-number">7.</span> <span class="nav-text">调整内核参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BD%AF%E4%BB%B6%E7%9B%AE%E5%BD%95%E5%92%8C%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6%E5%AD%98%E6%94%BE%E7%9B%AE%E5%BD%95%EF%BC%88%E7%9B%AE%E5%BD%95%E7%9A%84%E4%BD%8D%E7%BD%AE%EF%BC%8C%E6%A0%B9%E6%8D%AE%E8%87%AA%E5%B7%B1%E7%9A%84%E6%83%85%E5%86%B5%E6%9D%A5%E5%AE%9A%EF%BC%89%EF%BC%8C%E5%B9%B6%E6%94%B9%E5%8F%98%E7%9B%B8%E5%BA%94%E7%9A%84%E6%9D%83%E9%99%90"><span class="nav-number">8.</span> <span class="nav-text">创建数据库软件目录和数据文件存放目录（目录的位置，根据自己的情况来定），并改变相应的权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEoracle%E7%94%A8%E6%88%B7%E7%9A%84%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">9.</span> <span class="nav-text">配置oracle用户的环境变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Oracle"><span class="nav-number">10.</span> <span class="nav-text">安装Oracle</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Oracle%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE-centos7"><span class="nav-number">1.</span> <span class="nav-text">Oracle服务端安装及配置(centos7)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Oracle%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BB%A5%E5%8F%8APL-SQL-Developer%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98-window10"><span class="nav-number">2.</span> <span class="nav-text">Oracle客户端以及PL&#x2F;SQL Developer安装及配置问题(window10)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">准备工作：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E5%BC%8F%E5%B7%A5%E4%BD%9C%EF%BC%9A"><span class="nav-number">2.2.</span> <span class="nav-text">正式工作：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E6%9C%BAlinux%E7%9A%84oracle%E7%9A%84%E7%9B%91%E5%90%AC%E6%96%87%E4%BB%B6"><span class="nav-number">2.2.1.</span> <span class="nav-text">配置虚拟机linux的oracle的监听文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%AE%BF%E4%B8%BB%E6%9C%BAwin10%E7%9A%84%E7%8E%AF%E5%A2%83"><span class="nav-number">2.2.2.</span> <span class="nav-text">配置宿主机win10的环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PLSQL-Developer%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.3.</span> <span class="nav-text">PLSQL Developer的安装和配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="nav-number">2.2.4.</span> <span class="nav-text">问题总结：</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
